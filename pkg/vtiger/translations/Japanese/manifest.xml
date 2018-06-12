@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<module>
+	<type>language</type>
+	<name>Japanese</name>
+	<label>Japanese ( 日本語 )</label>
+	<prefix>ja_jp</prefix>
+	<version>6.2</version>
+	<encoding>UTF-8</encoding>
+	<author>Yuki Kokubo (http://nakayama-sk.net) ; CCArchitect Inc. (http://www.cc-arc.com) ; Teleluce Project (http://teleluce.cc-arc.com)</author>
+	<license>MPL2.0</license>
+	<dependencies>
+	  <vtiger_version>6.2.0</vtiger_version>
+	  <vtiger_max_version>6.*</vtiger_max_version>
+  </dependencies>
+</module>

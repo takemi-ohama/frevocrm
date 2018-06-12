@@ -1,0 +1,8 @@
+﻿.clearfix {
+	clear: both;
+}
+
+/* ダッシュボード バナー非表示 */
+.togglePromotion, .banner-container {
+    display: none !important;
+}

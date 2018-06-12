@@ -1,0 +1,72 @@
+@media screen and (max-width: 960px) {
+  .bodyContents {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+
+    min-width: auto;
+  }
+  .listViewTopMenuDiv {
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin-top: 90px;
+    padding-left: 21px;
+    z-index: 100;
+    background: #fafafb;
+  }
+  .contents-bottomscroll {
+    margin-top: 80px;
+    overflow: visible!important;
+  }
+
+  .bottomscroll-div {
+    display: block;
+    width: auto;
+  }
+
+  .topscroll-div {
+    display: block;
+    width: auto!important;
+  }
+
+  .alphabetSearch {
+    display: none;
+  }
+  .alphabetSorting {
+    display: none;
+  }
+  .detailViewContainer{
+    min-width: 1200px;
+  }
+
+  .modal {
+    width: 50%;
+    margin: -25%;
+  }
+
+ .globalSearchResults .contents {
+    overflow-y: auto!important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+
+
+  .wdcal_wrapper_inner iframe {
+    display: block;
+    min-height: 1200px;
+  }
+
+}
+
+div.wdcal_wrapper_outer {
+  min-width: 1200px!important;
+}
+
+.scolltimeevent,
+.tg-timedevents {
+/*  height: auto!important; */
+//  -webkit-overflow-scrolling: touch;
+}
+.calmain > div {
+//  -webkit-overflow-scrolling: touch;
+}

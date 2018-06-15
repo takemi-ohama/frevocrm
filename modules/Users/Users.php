@@ -377,6 +377,7 @@ class Users extends CRMEntity {
                 if (empty($result)) {
                     return false;
                 }
+
                 $crypt_type = $this->db->query_result($result, 0, 'crypt_type');
 				$this->column_fields["user_name"] = $this->db->query_result($result, 0, 'user_name');
                 $encrypted_password = $this->encrypt_password($user_password, $crypt_type);
@@ -430,6 +431,7 @@ class Users extends CRMEntity {
         $row = $this->db->fetchByAssoc($result);
         $this->column_fields = $row;
         $this->id = $row['id'];
+
 
         $user_hash = $this->get_user_hash($user_password);
 

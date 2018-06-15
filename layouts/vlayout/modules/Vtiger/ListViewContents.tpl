@@ -26,7 +26,7 @@
 {assign var = ALPHABETS_LABEL value = vtranslate('LBL_ALPHABETS', 'Vtiger')}
 {assign var = ALPHABETS value = ','|explode:$ALPHABETS_LABEL}
 
-<div class="alphabetSorting noprint">
+<div class="alphabetSorting noprint hide">
 	<table width="100%" class="table-bordered" style="border: 1px solid #ddd;table-layout: fixed">
 		<tbody>
 			<tr>

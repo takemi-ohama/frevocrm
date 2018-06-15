@@ -14,8 +14,9 @@ class Calendar_ViewTypes_View extends Vtiger_IndexAjax_View {
         parent::__construct();
         $this->exposeMethod('getViewTypes');
 		$this->exposeMethod('getSharedUsersList');
+        $this->exposeMethod('getSharedUsersMobileList');
     }
-        
+
 	function getViewTypes(Vtiger_Request $request) {
 		$viewer = $this->getViewer($request);
 		$moduleName = $request->getModule();
@@ -34,16 +35,30 @@ class Calendar_ViewTypes_View extends Vtiger_IndexAjax_View {
 	function getSharedUsersList(Vtiger_Request $request){
 		$viewer = $this->getViewer($request);
 		$currentUser = Users_Record_Model::getCurrentUserModel();
-		
+
 
 		$moduleName = $request->getModule();
 		$sharedUsers = Calendar_Module_Model::getSharedUsersOfCurrentUser($currentUser->id);
 		$sharedUsersInfo = Calendar_Module_Model::getSharedUsersInfoOfCurrentUser($currentUser->id);
-		
+
 		$viewer->assign('MODULE', $moduleName);
 		$viewer->assign('SHAREDUSERS', $sharedUsers);
 		$viewer->assign('SHAREDUSERS_INFO', $sharedUsersInfo);
 		$viewer->assign('CURRENTUSER_MODEL',$currentUser);
 		$viewer->view('CalendarSharedUsers.tpl', $moduleName);
 	}
+    function getSharedUsersMobileList(Vtiger_Request $request){
+        $viewer = $this->getViewer($request);
+        $currentUser = Users_Record_Model::getCurrentUserModel();
+
+
+        $moduleName = $request->getModule();
+        $sharedUsers = Calendar_Module_Model::getSharedUsersOfCurrentUser($currentUser->id);
+        $sharedUsersInfo = Calendar_Module_Model::getSharedUsersInfoOfCurrentUser($currentUser->id);
+        $viewer->assign('MODULE', $moduleName);
+        $viewer->assign('SHAREDUSERS', $sharedUsers);
+        $viewer->assign('SHAREDUSERS_INFO', $sharedUsersInfo);
+        $viewer->assign('CURRENTUSER_MODEL',$currentUser);
+        $viewer->view('MobileListSharedUsers.tpl', $moduleName);
+    }
 }

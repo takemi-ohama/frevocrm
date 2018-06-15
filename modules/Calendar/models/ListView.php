@@ -80,7 +80,50 @@ class Calendar_ListView_Model extends Vtiger_ListView_Model {
 		return $listQuery;
 	}
 
+	/**
+	 * Static Function to get the Instance of Vtiger ListView model for a given module and custom view
+	 * @param <String> $moduleName - Module Name
+	 * @param <Number> $viewId - Custom View Id
+	 * @return Vtiger_ListView_Model instance
+	 */
+	public static function getInstance($moduleName, $viewId='0') {
+		$db = PearDatabase::getInstance();
+		$currentUser = vglobal('current_user');
 
+		$modelClassName = Vtiger_Loader::getComponentClassName('Model', 'ListView', $moduleName);
+		$instance = new $modelClassName();
+		$moduleModel = Vtiger_Module_Model::getInstance($moduleName);
+		$queryGenerator = new QueryGenerator($moduleModel->get('name'), $currentUser);
+		$customView = new CustomView();
+
+		if (!empty($viewId) && $viewId != "0") {
+			if($viewId == -100){
+				$entityInstance = CRMEntity::getInstance($moduleName);
+				$listFields = $entityInstance->list_fields_name;
+				$listFields[] = 'id';
+				$queryGenerator->setFields($listFields);
+			}
+			else{
+			$queryGenerator->initForCustomViewById($viewId);
+
+			//Used to set the viewid into the session which will be used to load the same filter when you refresh the page
+			$viewId = $customView->getViewId($moduleName);
+			}
+		} else {
+			$viewId = $customView->getViewId($moduleName);
+			if(!empty($viewId) && $viewId != 0) {
+				$queryGenerator->initForDefaultCustomView();
+			} else {
+				$entityInstance = CRMEntity::getInstance($moduleName);
+				$listFields = $entityInstance->list_fields_name;
+				$listFields[] = 'id';
+				$queryGenerator->setFields($listFields);
+			}
+		}
+		$controller = new ListViewController($db, $currentUser, $queryGenerator);
+
+		return $instance->set('module', $moduleModel)->set('query_generator', $queryGenerator)->set('listview_controller', $controller);
+	}
 	/**
 	 * Function to get the list of Mass actions for the module
 	 * @param <Array> $linkParams

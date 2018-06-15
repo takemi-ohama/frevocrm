@@ -121,14 +121,14 @@
 												<div class="control-group">
 													<label class="control-label" for="username"><b>ユーザー名</b></label>
 													<div class="controls">
-														<input type="text" id="username" name="username" placeholder="Username" value="admin">
+														<input type="text" id="username" name="username" placeholder="Username" value="">
 													</div>
 												</div>
 
 			<div class="control-group">
 													<label class="control-label" for="password"><b>パスワード</b></label>
 				<div class="controls">
-														<input type="password" id="password" name="password" placeholder="Password" value="admin">
+														<input type="password" id="password" name="password" placeholder="Password" value="">
 													</div>
 												</div>
 												<div class="control-group signin-button">

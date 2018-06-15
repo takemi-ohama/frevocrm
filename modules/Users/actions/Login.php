@@ -22,6 +22,19 @@ class Users_Login_Action extends Vtiger_Action_Controller {
 	function process(Vtiger_Request $request) {
 		$username = $request->get('username');
         $password = $request->getRaw('password');
+        $windowsize = $request->get('windowsize');
+        global $log;
+        $log->debug("size $windowsize");
+        // Get Window Size
+        if(isset($_SESSION['windowSize'])) {
+            $size = $_SESSION['windowSize'];
+            $log->debug("windowsize is $size ");
+        }else {
+            $log->debug("getting windowsize ");
+            $_SESSION['windowSize'] = $windowsize;
+            $size = $_SESSION['windowSize'];
+            $log->debug("windowsize is $size ");
+        }
 
 		$user = CRMEntity::getInstance('Users');
 		$user->column_fields['user_name'] = $username;

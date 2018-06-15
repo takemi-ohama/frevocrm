@@ -68,7 +68,7 @@ class Vtiger_ExportData_Action extends Vtiger_Mass_Action {
 		$fileName = str_replace(' ','_',decode_html(vtranslate($moduleName, $moduleName)));
 		$exportType = $this->getExportContentType($request);
 
-		header("Content-Disposition:attachment;filename=$fileName.csv");
+		header('Content-Disposition: attachment; filename="'.$fileName.'.csv";filename*=UTF-8\'ja\''.urlencode($fileName).".csv");
 		header("Content-Type:$exportType;charset=UTF-8");
 		header("Expires: Mon, 31 Dec 2000 00:00:00 GMT" );
 		header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT" );
@@ -186,7 +186,7 @@ class Vtiger_ExportData_Action extends Vtiger_Mass_Action {
 		$fileName = str_replace(' ','_',decode_html(vtranslate($moduleName, $moduleName)));
 		$exportType = $this->getExportContentType($request);
 
-		header('Content-Disposition: attachment; filename="'.$fileName.'.csv";filename*=UTF-8\'ja\''.urlencode($fileName.".csv"));
+		header('Content-Disposition: attachment; filename="'.$fileName.'.csv";filename*=UTF-8\'ja\''.urlencode($fileName).".csv");
 		header("Content-Type:$exportType;charset=UTF-8");
 		header("Expires: Mon, 31 Dec 2000 00:00:00 GMT" );
 		header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT" );
@@ -264,7 +264,13 @@ class Vtiger_ExportData_Action extends Vtiger_Mass_Action {
 			}elseif($type == 'reference'){
 				$value = trim($value);
 				if(!empty($value)) {
-					$parent_module = getSalesEntityType($value);
+					// fieldmodulerelに設定されているrelmoduleからparentmoduleを取得する。
+					global $adb;
+					$tablename = $this->moduleInstance->get('basetable');
+					$parent_module =$adb->pquery("select vtiger_fieldmodulerel.relmodule from vtiger_field left join vtiger_fieldmodulerel on vtiger_fieldmodulerel.fieldid=vtiger_field.fieldid where fieldname='$fieldname' and tablename='$tablename'"); 
+					$parent_module = $adb->query_result($parent_module,0,"relmodule");
+					// fieldmodulerelに設定されていない場合はsetypeから判断する。
+					if(empty($parent_module)) $parent_module = getSalesEntityType($value);
 					$displayValueArray = getEntityName($parent_module, $value);
 					if(!empty($displayValueArray)){
 						foreach($displayValueArray as $k=>$v){
@@ -272,7 +278,11 @@ class Vtiger_ExportData_Action extends Vtiger_Mass_Action {
 						}
 					}
 					if(!empty($parent_module) && !empty($displayValue)){
-						$value = $parent_module."::::".$displayValue;
+						if($parent_module != 'Users') {
+                            $value = $parent_module."::::".$displayValue;
+                        } else {
+                            $value = 'Users::::'.Vtiger_Util_Helper::getOwnerName($value);
+                        }
 					}else{
 						$value = "";
 					}

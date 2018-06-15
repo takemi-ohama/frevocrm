@@ -14,14 +14,27 @@ vimport('~~/vtlib/Vtiger/Module.php');
  * Calendar Module Model Class
  */
 class Calendar_Module_Model extends Vtiger_Module_Model {
-
 	/**
 	 * Function returns the default view for the Calendar module
 	 * @return <String>
 	 */
+    public function getListMobileViewName() {
+        return 'MobileList';
+    }
 	public function getDefaultViewName() {
-		return $this->getCalendarViewName();
+        if(isset($_SESSION['windowSize'])) {
+            $size = $_SESSION['windowSize'];
+            if($size < 1024){
+                return $this->getListMobileViewName();
+            }
+            else{
+                return $this->getCalendarViewName();
+            }
+        }else {
+            return $this->getListMobileViewName();
+        }
 	}
+
 
 	/**
 	 * Function returns the calendar view name
@@ -124,7 +137,17 @@ class Calendar_Module_Model extends Vtiger_Module_Model {
 	public function getSideBarLinks($linkParams) {
 		$linkTypes = array('SIDEBARLINK', 'SIDEBARWIDGET');
 		$links = Vtiger_Link_Model::getAllByType($this->getId(), $linkTypes, $linkParams);
-
+        if(isset($_SESSION['windowSize'])) {
+            $size = $_SESSION['windowSize'];
+            if($size < 1024){
+                $listViewUrl = $this-> getListMobileViewUrl();
+            }
+            else{
+                $listViewUrl = $this->getListViewUrl();
+            }
+        }else {
+            $listViewUrl = $this-> getListMobileViewUrl();
+        };
 		$quickLinks = array(
 			array(
 				'linktype' => 'SIDEBARLINK',
@@ -141,7 +164,7 @@ class Calendar_Module_Model extends Vtiger_Module_Model {
 			array(
 				'linktype' => 'SIDEBARLINK',
 				'linklabel' => 'LBL_RECORDS_LIST',
-				'linkurl' => $this->getListViewUrl(),
+				'linkurl' => $listViewUrl,
 				'linkicon' => '',
 			),
 		);
@@ -168,6 +191,14 @@ class Calendar_Module_Model extends Vtiger_Module_Model {
 				'linkicon' => ''
 			);
 		}
+        if ($linkParams['ACTION'] == 'MobileList') {
+            $quickWidgets[] = array(
+                'linktype' => 'SIDEBARWIDGET',
+                'linklabel' => 'LBL_ADDED_CALENDARS',
+                'linkurl' => 'module='.$this->get('name').'&view=ViewTypes&mode=getSharedUsersMobileList',
+                'linkicon' => ''
+            );
+        }
 
 		$quickWidgets[] = array(
 			'linktype' => 'SIDEBARWIDGET',
@@ -182,6 +213,9 @@ class Calendar_Module_Model extends Vtiger_Module_Model {
 
 		return $links;
 	}
+    public function getListMobileViewUrl() {
+        return 'index.php?module='.$this->get('name').'&view='.$this->getListMobileViewName();
+    }
 
 	/**
 	 * Function returns the url that shows Calendar Import result
@@ -337,8 +371,8 @@ class Calendar_Module_Model extends Vtiger_Module_Model {
 	public static function getCalendarViewTypes($id){
 		$db = PearDatabase::getInstance();
 
-		$query = "SELECT * FROM vtiger_calendar_user_activitytypes 
-			INNER JOIN vtiger_calendar_default_activitytypes on vtiger_calendar_default_activitytypes.id=vtiger_calendar_user_activitytypes.defaultid 
+		$query = "SELECT * FROM vtiger_calendar_user_activitytypes
+			INNER JOIN vtiger_calendar_default_activitytypes on vtiger_calendar_default_activitytypes.id=vtiger_calendar_user_activitytypes.defaultid
 			WHERE vtiger_calendar_user_activitytypes.userid=?";
         $result = $db->pquery($query, array($id));
         $rows = $db->num_rows($result);

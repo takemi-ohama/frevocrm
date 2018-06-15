@@ -40,6 +40,7 @@ class VTEmailTask extends VTTask{
 			$entityIdDetails = vtws_getIdComponents($entity->getId());
 			$entityId = $entityIdDetails[1];
 			$moduleName = 'Emails';
+			$_REQUEST['module'] = $moduleName;
 			$userId = $current_user->id;
 			$emailFocus = CRMEntity::getInstance($moduleName);
 			$emailFieldValues = array(

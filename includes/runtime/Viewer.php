@@ -12,17 +12,18 @@ vimport ('~/libraries/Smarty/libs/SmartyBC.class.php');
 
 class Vtiger_Viewer extends SmartyBC {
 
-	const DEFAULTLAYOUT = 'vlayout';
+	const DEFAULTLAYOUT = 'vlayout2';
+    const DESKTOPLAYOUT = 'vlayout';
 	const DEFAULTTHEME  = 'softed';
 	static $currentLayout;
-	
+
 	// Turn-it on to analyze the data pushed to templates for the request.
 	protected static $debugViewer = false;
-	
+
 	/**
 	 * log message into the file if in debug mode.
 	 * @param type $message
-	 * @param type $delimiter 
+	 * @param type $delimiter
 	 */
 	protected function log($message, $delimiter="\n") {
 		static $file = null;
@@ -48,13 +49,7 @@ class Vtiger_Viewer extends SmartyBC {
 			$templatesDir = $THISDIR . '/../../layouts/'.$media;
 			$compileDir = $THISDIR . '/../../test/templates_c/'.$media;
 		}
-        global $default_layout;
-        $checkforlayout = file_exists($THISDIR . '/../../layouts/'.$default_layout) ;
-        if($default_layout && $checkforlayout ) {
-            self::$currentLayout = $default_layout;
-            $templatesDir = $THISDIR . '/../../layouts/' . $default_layout;
-            $compileDir = $THISDIR . '/../../test/templates_c/' . $default_layout;
-        } else if(empty($templatesDir) || !file_exists($templatesDir)) {
+		if(empty($templatesDir) || !file_exists($templatesDir)) {
 			self::$currentLayout = self::getDefaultLayoutName();
 			$templatesDir = $THISDIR . '/../../layouts/'.self::getDefaultLayoutName();
 			$compileDir = $THISDIR . '/../../test/templates_c/'.self::getDefaultLayoutName();
@@ -64,14 +59,14 @@ class Vtiger_Viewer extends SmartyBC {
 			mkdir($compileDir, 0777, true);
 		}
 		$this->setTemplateDir(array($templatesDir));
-		$this->setCompileDir($compileDir);		
+		$this->setCompileDir($compileDir);
 
 		// FOR SECURITY
 		// Escape all {$variable} to overcome XSS
 		// We need to use {$variable nofilter} to overcome double escaping
 		// TODO: Until we review the use disabled.
 		//$this->registerFilter('variable', array($this, 'safeHtmlFilter'));
-		
+
 		// FOR DEBUGGING: We need to have this only once.
 		static $debugViewerURI = false;
 		if (self::$debugViewer && $debugViewerURI === false) {
@@ -109,7 +104,19 @@ class Vtiger_Viewer extends SmartyBC {
 	 * @return <String> - Default Layout Name
 	 */
 	public static function getDefaultLayoutName(){
-		return self::DEFAULTLAYOUT;
+        if(isset($_SESSION['windowSize'])) {
+            $size = $_SESSION['windowSize'];
+            if($size < 1024){
+                return self::DEFAULTLAYOUT;
+            }
+            else{
+                return self::DESKTOPLAYOUT;
+            }
+        }else {
+            return self::DEFAULTLAYOUT;
+
+        }
+
 	}
 
 	/**

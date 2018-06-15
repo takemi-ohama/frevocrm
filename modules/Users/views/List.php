@@ -65,7 +65,7 @@ class Users_List_View extends Settings_Vtiger_List_View {
 
 		$linkParams = array('MODULE'=>$moduleName, 'ACTION'=>$request->get('view'), 'CVID'=>$cvId);
 		$linkModels = $listViewModel->getListViewMassActions($linkParams);
-                $listViewModel->set('status', $status);
+        $listViewModel->set('status', $status);
 
 		$pagingModel = new Vtiger_Paging_Model();
 		$pagingModel->set('page', $pageNumber);

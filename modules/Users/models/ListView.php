@@ -74,7 +74,7 @@ class Users_ListView_Model extends Vtiger_ListView_Model {
 		$fields = $queryGenerator->getFields();
 		$fields[] = 'id';
 		$queryGenerator->setFields($fields);
-		
+
 		return parent::getListViewEntries($pagingModel);
 	}
 

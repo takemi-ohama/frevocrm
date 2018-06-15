@@ -29,7 +29,10 @@
 				</a>
 				<div class="basicFieldOperations pull-right hide" style="width : 250px;">
 					<form class="form-horizontal fieldDetailsForm" method="POST">
-						<div class="modal-header"><strong>{vtranslate($FIELD_MODEL->get('label'), $SELECTED_MODULE_NAME)}</strong></div>
+						<div class="modal-header">
+							<strong><input type="text" name="label" value="{vtranslate($FIELD_MODEL->get('label'), $SELECTED_MODULE_NAME)}"></strong>
+							<input type="hidden" name="label_before" value="{vtranslate($FIELD_MODEL->get('label'), $SELECTED_MODULE_NAME)}">
+						</div>
 						<div class="contentsBackground" style="padding-bottom: 5px;">
 						<span><label class="checkbox" style="padding-left: 25px; padding-top: 5px;"><input type="hidden" name="mandatory" value="O" />
 								<input type="checkbox" name="mandatory" {if $IS_MANDATORY} checked {/if} 

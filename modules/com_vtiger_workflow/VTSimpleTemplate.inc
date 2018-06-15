@@ -299,6 +299,7 @@ class VTSimpleTemplate{
                                         $fieldValue = vtranslate('LBL_NO',$moduleName);
                                     }
                                     break;
+			case 'owner'		 :
             case 'reference'     :  if($fieldName == 'currency_id') {
                                         $currencyId = explode('x', $fieldValue);
                                         $currencyId = $currencyId[1];

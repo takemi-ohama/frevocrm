@@ -10,6 +10,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=9; IE=10; IE=11" />
         <style type="text/css">
             body{
                font-family: Tahoma, "Trebuchet MS","Lucida Grande",Verdana !important;

@@ -14,6 +14,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=9; IE=10; IE=11" />
 	</head>
 	<body onLoad="javascript:window.print()" style="padding:3% 5%;">
 		{assign var="TO_EMAILS" value=$RECORD->get('saved_toid')|replace:']':''}

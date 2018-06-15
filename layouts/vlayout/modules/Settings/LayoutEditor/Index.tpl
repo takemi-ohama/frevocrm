@@ -123,7 +123,8 @@
                                                                     <div class="basicFieldOperations pull-right hide" style="width : 250px;">
                                                                         <form class="form-horizontal fieldDetailsForm" method="POST">
                                                                             <div class="modal-header contentsBackground">
-                                                                                <strong>{vtranslate($FIELD_MODEL->get('label'), $SELECTED_MODULE_NAME)}</strong>
+                                                                                <strong><input type="text" name="label" value="{vtranslate($FIELD_MODEL->get('label'), $SELECTED_MODULE_NAME)}"></strong>
+                                                                                <input type="hidden" name="label_before" value="{vtranslate($FIELD_MODEL->get('label'), $SELECTED_MODULE_NAME)}">
                                                                                 <div class="pull-right"><a href="javascript:void(0)" class='cancel'>X</a></div>
                                                                             </div>
                                                                             <div style="padding-bottom: 5px;">
@@ -289,7 +290,8 @@
                                     <div class="basicFieldOperations pull-right hide" style="width : 250px;">
                                         <form class="form-horizontal fieldDetailsForm" method="POST">
                                             <div class="modal-header contentsBackground">
-                                                <strong>{vtranslate($FIELD_MODEL->get('label'), $SELECTED_MODULE_NAME)}</strong>
+                                                <strong><input type="text" name="label" value="{vtranslate($FIELD_MODEL->get('label'), $SELECTED_MODULE_NAME)}"></strong>
+                                                <input type="hidden" name="label_before" value="{vtranslate($FIELD_MODEL->get('label'), $SELECTED_MODULE_NAME)}">
                                                 <div class="pull-right"><a href="javascript:void(0)" class="cancel">X</a></div>
                                             </div>
                                             <div style="padding-bottom: 5px;">

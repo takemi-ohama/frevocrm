@@ -656,7 +656,7 @@ jQuery.Class('Settings_LayoutEditor_Js', {
 	setFieldDetails : function(result, form) {
 		var thisInstance = this;
 		//add field label to the field details
-		form.find('.modal-header').html(jQuery('<strong>'+result['label']+'</strong><div class="pull-right"><a href="javascript:void(0)" class="cancel">X</a></div>'));
+		form.find('.modal-header').html(jQuery('<strong><input type="text" name="label" value="'+result['label']+'"></strong><input type="hidden" name="label_before" value="'+result['label']+'"><div class="pull-right"><a href="javascript:void(0)" class="cancel">X</a></div>'));
 
 		var defaultValueUi = form.find('.defaultValueUi');
 		if(result['mandatory']) {
@@ -1267,8 +1267,16 @@ jQuery.Class('Settings_LayoutEditor_Js', {
 		params['fieldid'] = fieldId;
 		params['sourceModule'] = jQuery('#selectedModuleName').val();
 
+		if(params['label'] == params['label_before']) {
+			params['label'] = '';//空にしておくとlabelが更新されない
+		}
+		params['label_before'] = '';
+
 		AppConnector.request(params).then(
 			function(data) {
+				var field = $("div[data-field-id='" + data.result.fieldid + "']");
+				field.find(".fieldLabel").text(data.result.label);
+
 				progressIndicatorElement.progressIndicator({'mode' : 'hide'});
 				var params = {};
 				params['text'] = app.vtranslate('JS_FIELD_DETAILS_SAVED');

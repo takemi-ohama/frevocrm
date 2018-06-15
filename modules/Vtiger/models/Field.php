@@ -1093,9 +1093,9 @@ class Vtiger_Field_Model extends Vtiger_Field {
 
     public function __update() {
         $db = PearDatabase::getInstance();
-        $query = 'UPDATE vtiger_field SET typeofdata=?,presence=?,quickcreate=?,masseditable=?,defaultvalue=?,summaryfield=? WHERE fieldid=?';
+        $query = 'UPDATE vtiger_field SET typeofdata=?,presence=?,quickcreate=?,masseditable=?,defaultvalue=?,summaryfield=?,fieldlabel=? WHERE fieldid=?';
         $params = array($this->get('typeofdata'), $this->get('presence'), $this->get('quickcreate'), $this->get('masseditable'),
-                        $this->get('defaultvalue'), $this->get('summaryfield'), $this->get('id'));
+                        $this->get('defaultvalue'), $this->get('summaryfield'), $this->get('label'), $this->get('id'));
 		$db->pquery($query,$params);
     }
 

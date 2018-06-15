@@ -13,6 +13,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=9; IE=10; IE=11" />
 		<title>{'LBL_PRINT_REPORT'|@vtranslate:$MODULE}</title>
         <style>
             {literal}

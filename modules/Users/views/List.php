@@ -165,17 +165,25 @@ class Users_List_View extends Settings_Vtiger_List_View {
 	function getListViewCount(Vtiger_Request $request){
 		$moduleName = $request->getModule();
 		$cvId = $request->get('viewname');
-		if(empty($cvId)) {
-			$cvId = '0';
-		}
+
+		$listViewModel = Vtiger_ListView_Model::getInstance($moduleName, $cvId);
 
 		$searchKey = $request->get('search_key');
 		$searchValue = $request->get('search_value');
+		$operator = $request->get('operator');
+		if(!empty($operator)) {
+			$listViewModel->set('operator', $operator);
+		}
+		if(!empty($searchKey) && !empty($searchValue)) {
+			$listViewModel->set('search_key', $searchKey);
+			$listViewModel->set('search_value', $searchValue);
+		}
 
-		$listViewModel = Vtiger_ListView_Model::getInstance($moduleName, $cvId);
-		$listViewModel->set('search_key', $searchKey);
-		$listViewModel->set('search_value', $searchValue);
-		$listViewModel->set('operator', $request->get('operator'));
+		$status = $request->get('status');
+        if(empty($status))
+            $status = 'Active';
+
+		$listViewModel->set('status', $status);
 
 		$count = $listViewModel->getListViewCount();
 

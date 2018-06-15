@@ -16,6 +16,7 @@
             <title>F-RevoCRM セットアップ</title>
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=9; IE=10; IE=11" />
             <link REL="SHORTCUT ICON" HREF="layouts/vlayout/skins/images/favicon.ico">
             <link rel="stylesheet" href="libraries/bootstrap/css/bootstrap.css" type="text/css" media="screen" />
             <link rel="stylesheet" href="libraries/bootstrap/css/bootstrap-responsive.css" type="text/css" media="screen">

@@ -94,7 +94,7 @@ class Calendar_Feed_Action extends Vtiger_BasicAjax_Action {
 			$queryGenerator = new QueryGenerator($moduleModel->get('name'), $currentUser);
 		}
 
-		$queryGenerator->setFields(array('subject', 'eventstatus', 'visibility','date_start','time_start','due_date','time_end','assigned_user_id','id','activitytype','description'));
+		$queryGenerator->setFields(array('subject', 'eventstatus', 'visibility','date_start','time_start','due_date','time_end','assigned_user_id','id','activitytype','description','location'));
 		$query = $queryGenerator->getQuery();
 
 		$query.= " AND vtiger_activity.activitytype NOT IN ('Emails','Task') AND ";
@@ -138,6 +138,7 @@ class Calendar_Feed_Action extends Vtiger_BasicAjax_Action {
 			$balloon_html .= "<span class='title'>".vtranslate('End Date & Time',"Events")."</span>：".Vtiger_Util_Helper::formatDateTimeIntoDayString($record['due_date']." ".$record['time_end'])."<br>";
 			$balloon_html .= "<span class='title'>".vtranslate('LBL_ACTIVITY_TYPES',"Calendar")."</span>：".vtranslate($record['activitytype'],"Events")."<br>";
 			$balloon_html .= "<span class='title'>".vtranslate('Status',"Vtiger")."</span>：".vtranslate($record['eventstatus'],"Events")."<br>";
+			$balloon_html .= "<span class='title'>".vtranslate('Location',"Events")."</span>：".$record['location']."<br>";
 			$balloon_html .= "<span class='title'>".vtranslate('Description',"Events")."</span>：<br>".vtranslate($record['description'],"Events");
 
 

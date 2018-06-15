@@ -217,10 +217,16 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js",{
 			'module' : module,
 			'view' : "ListAjax",
 			'mode' : "getPageCount",
-			'search_key' : 'status',
-            'operator' : 'e',
-            'search_value' : jQuery('#usersFilter').val()
+            'status' : jQuery('#usersFilter').val()
 		}
+        var searchValue = this.getAlphabetSearchValue();
+
+        if((typeof searchValue != "undefined") && (searchValue.length > 0)) {
+            pageCountParams['search_key'] = this.getAlphabetSearchField();
+            pageCountParams['search_value'] = searchValue;
+            pageCountParams['operator'] = "s";
+        }
+
 		return pageCountParams;
 	},
 	/*
@@ -253,10 +259,9 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js",{
                             'module' : app.getModuleName(),
                             'view' : 'List',
                             'parent' : app.getParentModuleName(),
-                            'search_key' : 'status',
-                            'operator' : 'e',
-                            'search_value' : jQuery('#usersFilter').val()
+                            'status' : jQuery('#usersFilter').val()
                         };
+
                         AppConnector.request(params).then(
                             function(data){
                                 progressInstance.progressIndicator({
@@ -276,8 +281,35 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js",{
                         );
                 });
         },
-        
-        
+
+        getDefaultParams : function() {
+            var pageNumber = jQuery('#pageNumber').val();
+            var module = app.getModuleName();
+            var parent = app.getParentModuleName();
+            var cvId = this.getCurrentCvId();
+            var orderBy = jQuery('#orderBy').val();
+            var sortOrder = jQuery("#sortOrder").val();
+            var params = {
+                'module': module,
+                'parent' : parent,
+                'page' : pageNumber,
+                'view' : "List",
+                'viewname' : cvId,
+                'orderby' : orderBy,
+                'sortorder' : sortOrder,
+                'status' : jQuery('#usersFilter').val()
+            }
+
+            var searchValue = this.getAlphabetSearchValue();
+            if((typeof searchValue != "undefined") && (searchValue.length > 0)) {
+                params['search_key'] = this.getAlphabetSearchField();
+                params['search_value'] = searchValue;
+                params['operator'] = "s";
+            }
+            params.search_params = JSON.stringify(this.getListSearchParams());
+            return params;
+        },
+
 	registerEvents : function() {
 		this._super();
 		this.registerEventForAlphabetSearch();

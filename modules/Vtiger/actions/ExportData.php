@@ -64,12 +64,34 @@ class Vtiger_ExportData_Action extends Vtiger_Mass_Action {
 		$translatedHeaders = array();
 		foreach($headers as $header) $translatedHeaders[] = vtranslate(html_entity_decode($header, ENT_QUOTES), $moduleName);
 
-		$entries = array();
-		for($j=0; $j<$db->num_rows($result); $j++) {
-			$entries[] = $this->sanitizeValues($db->fetchByAssoc($result, $j));
-		}
+		$moduleName = $request->get('source_module');
+		$fileName = str_replace(' ','_',decode_html(vtranslate($moduleName, $moduleName)));
+		$exportType = $this->getExportContentType($request);
 
-		$this->output($request, $translatedHeaders, $entries);
+		header("Content-Disposition:attachment;filename=$fileName.csv");
+		header("Content-Type:$exportType;charset=UTF-8");
+		header("Expires: Mon, 31 Dec 2000 00:00:00 GMT" );
+		header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT" );
+		header("Cache-Control: post-check=0, pre-check=0", false );
+
+		$header = implode("\",\"", $translatedHeaders);
+		$header = "\"" .$header;
+		$header .= "\"\r\n";
+		echo chr(0xEF).chr(0xBB).chr(0xBF).$header;
+
+		for($j=0; $j<$db->num_rows($result); $j++) {
+			$row = $this->sanitizeValues($db->fetchByAssoc($result, $j));
+
+			$line = implode("\",\"",$row);
+			$line = "\"" .$line;
+			$line .= "\"\r\n";
+			echo $line;
+
+			if($j % 1000 == 0) {
+				ob_flush();
+				flush();
+			}
+		}
 	}
 
 	/**

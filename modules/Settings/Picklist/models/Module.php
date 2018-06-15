@@ -90,6 +90,20 @@ class Settings_Picklist_Module_Model extends Vtiger_Module_Model {
 			$columnName = $row['columnname'];
 			$query = 'UPDATE ' . $tableName . ' SET ' . $columnName . '=? WHERE ' . $columnName . '=?';
 			$db->pquery($query, array($newValue, $oldValue));
+
+            // 複数選択肢のアップデート
+            $sep = ' |##| ';
+            // 前方一致の置換
+            $query = 'UPDATE ' . $tableName . ' SET '. $columnName.'=replace('.$columnName.', ?, ?) WHERE ' . $columnName . ' like ?';
+			$db->pquery($query, array($oldValue.$sep, $newValue.$sep, $oldValue.$sep.'%'));
+
+            // 中間一致の置換
+            $query = 'UPDATE ' . $tableName . ' SET '. $columnName.'=replace('.$columnName.', ?, ?) WHERE ' . $columnName . ' like ?';
+			$db->pquery($query, array($sep.$oldValue.$sep, $sep.$newValue.$sep, '%'.$sep.$oldValue.$sep.'%'));
+
+            // 後方一致の置換
+            $query = 'UPDATE ' . $tableName . ' SET '. $columnName.'=replace('.$columnName.', ?, ?) WHERE ' . $columnName . ' like ?';
+			$db->pquery($query, array($sep.$oldValue, $sep.$newValue, '%'.$sep.$oldValue));
 		}
 
 		$query = "UPDATE vtiger_field SET defaultvalue=? WHERE defaultvalue=? AND columnname=?";

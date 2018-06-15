@@ -6,3 +6,8 @@
 .togglePromotion, .banner-container {
     display: none !important;
 }
+
+/* フィールド編集 */
+.fieldDetailsForm .modal-header input {
+	width: 185px;
+}

@@ -132,7 +132,7 @@ class LoggerAppenderRollingFile extends LoggerAppenderFile {
             // Map {(maxBackupIndex - 1), ..., 2, 1} to {maxBackupIndex, ..., 3, 2}
             for ($i = $this->maxBackupIndex - 1; $i >= 1; $i--) {
                 $file = $fileName . "." . $i;
-                if (is_readable($file)) {
+                if (is_writable($file)) {
                     $target = $fileName . '.' . ($i + 1);
                     rename($file, $target);
                 }

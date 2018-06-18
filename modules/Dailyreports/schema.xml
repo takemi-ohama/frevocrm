@@ -1,0 +1,25 @@
+<?xml version='1.0'?>
+<schema>
+	<tables>
+		<table>
+			<name>vtiger_dailyreports</name>
+			<sql><![CDATA[CREATE TABLE `vtiger_dailyreports` (
+  `dailyreportsid` int(11) DEFAULT NULL,
+  `dailyreportsname` varchar(100) DEFAULT NULL,
+  `dailyreportsstatus` varchar(100) DEFAULT NULL,
+  `dailyreportscomment` varchar(250) DEFAULT NULL,
+  `reportsdate` date DEFAULT NULL,
+  `reports_to_id` int(19) DEFAULT NULL,
+  `reportsterm` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`dailyreportsid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8]]></sql>
+		</table>
+		<table>
+			<name>vtiger_dailyreportscf</name>
+			<sql><![CDATA[CREATE TABLE `vtiger_dailyreportscf` (
+  `dailyreportsid` int(11) NOT NULL,
+  PRIMARY KEY (`dailyreportsid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8]]></sql>
+		</table>
+	</tables>
+</schema>

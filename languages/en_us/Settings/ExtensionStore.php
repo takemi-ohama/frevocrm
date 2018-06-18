@@ -71,7 +71,7 @@ $languageStrings = array(
         'LBL_EMAIL_ADDRESS' => 'Email address',
         'LBL_FIRST_NAME' => 'First name',
         'LBL_LAST_NAME' => 'Last name',
-        'LBL_COMPANY_NAME' => 'Comapany name',
+        'LBL_COMPANY_NAME' => 'Company name',
         'LBL_PASSWORD' => 'Password',
         'LBL_CONFIRM_PASSWORD' => 'Confirm password',
         'LBL_REGISTER' => 'Register',
@@ -93,6 +93,7 @@ $languageStrings = array(
         'LBL_SIGNUP_FOR_MARKET_PLACE' => 'Signup for Marketplace',
         'LBL_UNAUTHORIZED' => 'Unauthorized',
         'LBL_EXPIRY_DATE'  => 'Expiry Date',
+	'LBL_LOGOUT'  => 'Logout',
     
         'firstname' => 'First Name',
         'lastname' => 'Last Name',
@@ -116,5 +117,7 @@ $jsLanguageStrings = array(
   'JS_PLEASE_LOGIN_TO_MARKETPLACE_FOR_INSTALLING_EXTENSION' => 'Please login to marketplace for installing extension',
   'JS_PLEASE_SETUP_CARD_DETAILS_TO_INSTALL_EXTENSION' => 'Please setup card details to install extension',
   'JS_PLEASE_LOGIN_TO_MARKETPLACE_FOR_UNINSTALLING_EXTENSION' => 'Please login to marketplace for uninstalling extension',
+  'JS_LBL_ARE_YOU_SURE_YOU_WANT_TO_INSTALL_THIS_EXTENSION' => 'Are you sure you want to install this extension?',  
   'JS_CARD_DETAILS_UPDATED' => 'Card details updated!',  
+  'JS_LBL_ARE_YOU_SURE_YOU_WANT_TO_LOGOUT_FROM_EXTENSION' => 'Are you sure you want to log out from extension?',
 );

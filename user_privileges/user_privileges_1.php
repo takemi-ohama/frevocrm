@@ -1,0 +1,9 @@
+<?php
+
+
+//This is the access privilege file
+$is_admin=true;
+
+$user_info=array('accesskey'=>'q3slXxQE1MALRn1e','activity_view'=>'This Week','address_city'=>'','address_country'=>'','address_postalcode'=>'','address_state'=>'','address_street'=>'','confirm_password'=>'$1$ad000000$nYTnfhTZRmUP.wQT9y1AE.','currency_decimal_separator'=>'.','currency_grouping_pattern'=>'123,456,789','currency_grouping_separator'=>',','currency_id'=>'1','currency_symbol_placement'=>'$1.0','date_format'=>'yyyy-mm-dd','department'=>'','description'=>'','email1'=>'takemi.ohama@ietty.co.jp','email2'=>'','end_hour'=>'23:00','first_name'=>'','hour_format'=>'12','is_admin'=>'on','last_name'=>'Administrator','lead_view'=>'Today','phone_fax'=>'','phone_home'=>'','phone_mobile'=>'','phone_other'=>'','phone_work'=>'','reports_to_id'=>'','roleid'=>'H2','secondaryemail'=>'','signature'=>'','start_hour'=>'00:00','status'=>'Active','time_zone'=>'Asia/Tokyo','title'=>'','user_name'=>'admin','user_password'=>'$1$ad000000$LlWAYBC0xuJoMx5iLpK.g1','imagename'=>'','internal_mailer'=>'1','theme'=>'alphagrey','language'=>'ja_jp','reminder_interval'=>'1 Minute','phone_crm_extension'=>'','no_of_currency_decimals'=>'0','truncate_trailing_zeros'=>'1','dayoftheweek'=>'Sunday','callduration'=>'5','othereventduration'=>'5','calendarsharedtype'=>'public','default_record_view'=>'Summary','leftpanelhide'=>'0','rowheight'=>'medium','defaulteventstatus'=>'','defaultactivitytype'=>'','hidecompletedevents'=>'0','is_owner'=>'1','currency_name'=>'Japan, Yen','currency_code'=>'JPY','currency_symbol'=>'&#165;','conv_rate'=>'1.00000','record_id'=>'','record_module'=>'','id'=>'1');
+
+?>
